@@ -20,6 +20,7 @@ struct WindowHelper abstract final {
 	static CString WindowRectToString(HWND hWnd);
 	static CString GetWindowClassName(HWND hWnd);
 	static CString GetWindowText(HWND hWnd);
+	static CString GetWindowAppId(HWND hwnd);
 	static HICON GetWindowIcon(HWND hWnd);
 	static HICON GetWindowOrProcessIcon(HWND hWnd);
 	static bool Flash(HWND hWnd);

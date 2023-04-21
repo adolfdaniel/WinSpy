@@ -195,7 +195,7 @@ IDI_WINDOW_NOTEXT       ICON                    "res\\window-notext.ico"
 
 IDI_WINDOW_MINIMIZE     ICON                    "res\\Minimize.ico"
 
-IDI_WINDOW_SENDTOBACK   ICON                    "D:\\Dev\\WinSpy\\WinSpy\\res\\WindowSendToBack.ico"
+IDI_WINDOW_SENDTOBACK   ICON                    "res\\WindowSendToBack.ico"
 
 IDI_TARGET              ICON                    "res\\Target.ico"
 

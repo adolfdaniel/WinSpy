@@ -36,7 +36,7 @@ public:
 		Handle, ClassName, Text, Style, ExtendedStyle, ProcessName,
 		ProcessId, ThreadId, ParentWindow, FirstChildWindow, NextWindow, PrevWindow, OwnerWindow,
 		WindowProc, UserData, ID, Rectangle,
-		ClassAtom, ClassStyle, ClassExtra, WindowExtra,
+		ClassAtom, ClassStyle, ClassExtra, WindowExtra, WindowAppId
 	};
 	struct DataItem {
 		CString Property;

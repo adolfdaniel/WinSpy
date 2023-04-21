@@ -28,6 +28,7 @@ LRESULT CWindowsListView::OnCreate(UINT, WPARAM, LPARAM, BOOL&) {
 		{ L"Class Name", DataItemType::ClassName, 140 },
 		{ L"Handle", DataItemType::Handle, 80, LVCFMT_RIGHT },
 		{ L"Text", DataItemType::Text, 150 },
+		{ L"Window App Id", DataItemType::WindowAppId, 256 },
 		{ L"Style", DataItemType::Style, 80, LVCFMT_RIGHT },
 		{ L"Ex Style", DataItemType::ExtendedStyle, 80, LVCFMT_RIGHT },
 		{ L"PID", DataItemType::ProcessId, 70, LVCFMT_RIGHT },
@@ -163,6 +164,9 @@ CString CWindowsListView::GetColumnText(HWND, int row, int col) const {
 		case DataItemType::WindowExtra:
 			text.Format(L"%u", (ULONG)::GetClassLongPtr(win, GCL_CBWNDEXTRA));
 			break;
+		case DataItemType::WindowAppId:
+			return WindowHelper::GetWindowAppId(h);
+
 	}
 	return text;
 }
@@ -204,6 +208,7 @@ void CWindowsListView::DoSort(const SortInfo* si) {
 			case DataItemType::ProcessName: return SortHelper::Sort(h1.ProcessName, h2.ProcessName, si->SortAscending);
 			case DataItemType::ID: return SortHelper::Sort(WindowHelper::GetID(h1.hWnd), WindowHelper::GetID(h2.hWnd), si->SortAscending);
 			case DataItemType::UserData: return SortHelper::Sort(WindowHelper::GetUserData(h1.hWnd), WindowHelper::GetUserData(h2.hWnd), si->SortAscending);
+			case DataItemType::WindowAppId: return SortHelper::Sort(WindowHelper::GetWindowAppId(h1.hWnd), WindowHelper::GetWindowAppId(h2.hWnd), si->SortAscending);
 		}
 		return false;
 		});

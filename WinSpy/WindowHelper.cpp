@@ -1,4 +1,6 @@
 #include "pch.h"
+#include <propkey.h>
+#include <propvarutil.h>
 #include "resource.h"
 #include "WindowHelper.h"
 #include "ProcessHelper.h"
@@ -74,6 +76,30 @@ CString WindowHelper::GetWindowClassName(HWND hWnd) {
 CString WindowHelper::GetWindowText(HWND hWnd) {
 	CString text;
 	CWindow(hWnd).GetWindowText(text);
+	return text;
+}
+
+CString WindowHelper::GetWindowAppId(HWND hwnd) {
+	CString text;
+	CComPtr<IPropertyStore> propertyStore;
+	HRESULT hr = SHGetPropertyStoreForWindow(hwnd, IID_PPV_ARGS(&propertyStore));
+	if (FAILED(hr)) {
+		return text;
+	}
+
+	PROPVARIANT pv;
+	hr = propertyStore->GetValue(PKEY_AppUserModel_ID, &pv);
+	if (FAILED(hr)) {
+		return text;
+	}
+
+	WCHAR szTitle[256];
+	hr = PropVariantToString(pv, szTitle, ARRAYSIZE(szTitle));
+	if (SUCCEEDED(hr) || hr == STRSAFE_E_INSUFFICIENT_BUFFER) {
+		return CString(szTitle);
+	}
+
+	PropVariantClear(&pv);
 	return text;
 }
 
